@@ -52,7 +52,6 @@ export default class Login extends Component {
 
     const showLoginSuccess = (param) => {
       let data = param.data;
-      console.log(data);
       if(data.code == 0){
         Taro.showToast({
           title: '登录成功',
@@ -72,7 +71,6 @@ export default class Login extends Component {
     }
 
     const showLoginFailed = (param) => {
-      console.log(param);
       Taro.showToast({
         title: '接口错误',
         icon: 'none',
@@ -82,7 +80,6 @@ export default class Login extends Component {
 
     const confirmLogin = () => {
       const url = '//127.0.0.1:3000/users';
-      console.log(this.state.name, this.state.pwd);
       if(!this.state.name || !this.state.pwd){
         Taro.showToast({
           title: '当前用户名和密码为空，请检查后重试',
@@ -95,7 +92,7 @@ export default class Login extends Component {
         user_name: this.state.name,
         user_pwd: this.state.pwd 
       }
-      handleAjax(url, 'get', data, showLoginSuccess, showLoginFailed);
+      handleAjax(url, 'GET', data, showLoginSuccess, showLoginFailed);
     }
 
     return (

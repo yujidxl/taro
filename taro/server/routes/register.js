@@ -2,12 +2,15 @@ var express = require('express');
 var router = express.Router();
 var userModel = require('../model/users');
 
-/* GET home page. */
 router.post('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  const user_name = req.param("user_name");
-  const user_pwd = req.param("user_pwd");
-  console.log('user_name'+ user_name)
+  const user_name = req.body.user_name;
+  const user_pwd = req.body.user_pwd;
+  if(!user_name || !user_pwd){
+    res.json({
+      code: -2,
+      msg: '参数不能为空',
+    })
+  }
   userModel.find({user_name}).exec(async function(err1, doc1){
     if(err1){
       res.json({

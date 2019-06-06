@@ -29,7 +29,6 @@ export default class Register extends Component{
 
   showRegisterSuccess(param){
     let data = param.data;
-    console.log(data);
     if (data.code == 0) {
       Taro.showToast({
         title: '注册成功，自动登录中...',
@@ -50,7 +49,6 @@ export default class Register extends Component{
 
 
   showRegisterFailed(param){
-    console.log(param);
     Taro.showToast({
       title: '接口错误',
       icon: 'none',
@@ -62,7 +60,6 @@ export default class Register extends Component{
 
   confirmRegister(){
     const url = 'http://127.0.0.1:3000/register';
-    console.log(this.state.user_name, this.state.user_pwd)
     if(!this.state.user_name || !this.state.user_pwd){
       Taro.showToast({
         title: '用户名和密码不能为空',
@@ -73,7 +70,7 @@ export default class Register extends Component{
     }
     let data = {user_name: this.state.user_name, user_pwd: this.state.user_pwd};
 
-    handleAjax(url, 'post', data, this.showRegisterSuccess, this.showRegisterFailed)
+    handleAjax(url, 'POST', data, this.showRegisterSuccess, this.showRegisterFailed)
 
   }
 

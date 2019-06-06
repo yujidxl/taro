@@ -1,12 +1,15 @@
 import Taro from '@tarojs/taro';
-const handleAjax = (url, method = 'get', data, successFunc, failFunc) => {
-  Taro.request({
+const handleAjax = (url, method = 'GET', data, successFunc, failFunc) => {
+  let options = {
     url,
-    header: {'content-type':'application/json'},
     method,
+    responseType: 'json',
     data,
-    dataType: 'json',
-  })
+  }
+  if(method == 'POST'){
+    options.header = { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+  }
+  Taro.request(options)
   .then( (res) => { successFunc(res)})
   .catch(err => {failFunc(err)})
   .finally( () => {console.log(`对接口${url}发起的请求已结束`)});

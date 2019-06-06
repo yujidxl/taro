@@ -3,8 +3,7 @@ var router = express.Router();
 var userModel = require('../model/users');
 
 /* GET users listing. */
-router.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+router.get('/', function(req, res, next) {
   const user_name = req.param('user_name');
   const user_pwd = req.param('user_pwd');
   userModel.find({user_name}, {_id: 0}).exec(function(err1, doc1){
